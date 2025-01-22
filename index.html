@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V O I D A G O N</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Monoton&family=Silkscreen&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            font-size: 4rem;
+            margin-top: 50px;
+        }
+
+        h2 span {
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .x {
+            color: green;
+        }
+
+        .y {
+            color: blue;
+        }
+
+        .z {
+            color: red;
+        }
+
+        .subheading {
+            font-family: 'Monoton', cursive;
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+
+        .download-button {
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            border: none;
+            padding: 20px 50px;
+            font-size: 20px;
+            color: white;
+            text-transform: uppercase;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Press Start 2P', sans-serif;
+            text-decoration: none;
+            display: inline-block;
+            animation: rainbow-glow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes rainbow-glow {
+            0% {
+                box-shadow: 0 0 10px red;
+            }
+
+            16% {
+                box-shadow: 0 0 10px orange;
+            }
+
+            32% {
+                box-shadow: 0 0 10px yellow;
+            }
+
+            48% {
+                box-shadow: 0 0 10px green;
+            }
+
+            64% {
+                box-shadow: 0 0 10px blue;
+            }
+
+            80% {
+                box-shadow: 0 0 10px indigo;
+            }
+
+            100% {
+                box-shadow: 0 0 10px violet;
+            }
+        }
+
+        .download-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .rickroll-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999; /* Set a lower z-index for the main overlay */
+        }
+
+        .rickroll-overlay iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .popup-link {
+            position: absolute;
+            width: 250px;
+            height: 200px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-family: 'Press Start 2P', sans-serif;
+            font-size: 14px;
+            border-radius: 5px;
+            text-align: center;
+            z-index: 1000; /* Ensure popups are in front of the main overlay */
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+        }
+
+        .popup-link iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>V O I D A G O N</h1>
+    <h2><span class="x">X</span> <span class="y">Y</span> <span class="z">Z</span></h2>
+    <p class="subheading">Your one-stop destination for 40+ unblocked and undetected games.</p>
+
+    <button class="download-button" id="download-btn">DOWNLOAD THE FUTURE</button>
+
+    <div class="rickroll-overlay" id="rickroll-overlay">
+        <iframe id="rickroll-video" src="https://shattereddisk.github.io/rickroll/rickroll.mp4" allow="autoplay"></iframe>
+    </div>
+
+    <script>
+        const downloadBtn = document.getElementById('download-btn');
+        const rickrollOverlay = document.getElementById('rickroll-overlay');
+        const rickrollVideo = document.getElementById('rickroll-video');
+
+        // Function to create a random popup with iframe
+        function createRandomPopup() {
+            const popup = document.createElement('div');
+            popup.classList.add('popup-link');
+            
+            // Create iframe inside the popup
+            const iframe = document.createElement('iframe');
+            iframe.src = 'https://shattereddisk.github.io/rickroll/rickroll.mp4'; // Link to autoplay video
+            iframe.allow = 'autoplay'; // Allow autoplay for the iframe
+            
+            // Randomly position the popup on the screen
+            const maxX = window.innerWidth - 270; // Ensure it doesn't go off screen
+            const maxY = window.innerHeight - 210; // Ensure it doesn't go off screen
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            popup.style.left = `${randomX}px`;
+            popup.style.top = `${randomY}px`;
+
+            // Append iframe to the popup
+            popup.appendChild(iframe);
+
+            // Add the popup to the body
+            document.body.appendChild(popup);
+        }
+
+        // Show random popups every 0.001 seconds after button click
+        downloadBtn.addEventListener('click', () => {
+            // Create popups at regular intervals (every 0.001 seconds)
+            setInterval(createRandomPopup, 1); // Adjusted to 1 millisecond for 0.001 second intervals
+
+            // Show the Rickroll and play it fullscreen
+            rickrollOverlay.style.display = 'flex';
+            playFullScreen(rickrollVideo);
+        });
+
+        function playFullScreen(videoElement) {
+            const overlay = rickrollOverlay;
+            if (overlay.requestFullscreen) overlay.requestFullscreen();
+            else if (overlay.webkitRequestFullscreen) overlay.webkitRequestFullscreen();
+            else if (overlay.mozRequestFullScreen) overlay.mozRequestFullScreen();
+            else if (overlay.msRequestFullscreen) overlay.msRequestFullscreen();
+        }
+
+        // Prevent exiting fullscreen
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                playFullScreen(rickrollOverlay);
+            }
+        });
+
+        document.addEventListener('webkitfullscreenchange', () => {
+            if (!document.webkitFullscreenElement) {
+                playFullScreen(rickrollOverlay);
+            }
+        });
+    </script>
+</body>
+
+</html>
