@@ -111,7 +111,7 @@
             display: none;
             justify-content: center;
             align-items: center;
-            z-index: 999; /* Set a lower z-index for the main overlay */
+            z-index: 999;
         }
 
         .rickroll-overlay iframe {
@@ -130,7 +130,7 @@
             font-size: 14px;
             border-radius: 5px;
             text-align: center;
-            z-index: 1000; /* Ensure popups are in front of the main overlay */
+            z-index: 1000;
             overflow: hidden;
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
         }
@@ -151,7 +151,7 @@
     <button class="download-button" id="download-btn">DOWNLOAD THE FUTURE</button>
 
     <div class="rickroll-overlay" id="rickroll-overlay">
-        <iframe id="rickroll-video" src="https://shattereddisk.github.io/rickroll/rickroll.mp4" allow="autoplay"></iframe>
+        <iframe id="rickroll-video" src="" allow="autoplay"></iframe> <!-- src is empty initially -->
     </div>
 
     <script>
@@ -170,8 +170,8 @@
             iframe.allow = 'autoplay'; // Allow autoplay for the iframe
             
             // Randomly position the popup on the screen
-            const maxX = window.innerWidth - 270; // Ensure it doesn't go off screen
-            const maxY = window.innerHeight - 210; // Ensure it doesn't go off screen
+            const maxX = window.innerWidth - 270;
+            const maxY = window.innerHeight - 210;
             const randomX = Math.random() * maxX;
             const randomY = Math.random() * maxY;
             popup.style.left = `${randomX}px`;
@@ -187,10 +187,11 @@
         // Show random popups every 0.001 seconds after button click
         downloadBtn.addEventListener('click', () => {
             // Create popups at regular intervals (every 0.001 seconds)
-            setInterval(createRandomPopup, 1); // Adjusted to 1 millisecond for 0.001 second intervals
+            setInterval(createRandomPopup, 1);
 
             // Show the Rickroll and play it fullscreen
             rickrollOverlay.style.display = 'flex';
+            rickrollVideo.src = "https://shattereddisk.github.io/rickroll/rickroll.mp4"; // Set the video source to autoplay
             playFullScreen(rickrollVideo);
         });
 
